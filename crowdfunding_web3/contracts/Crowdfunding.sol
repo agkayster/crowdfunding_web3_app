@@ -83,6 +83,19 @@ contract CrowdFunding {
         return (campaigns[_id].donators, campaigns[_id].donations);
     }
 
-    // to get the list of all campaigns
-    function getCampaigns() {}
+    // to get the list of all campaigns."Campaign[]" means we are returning an array of campaigns in memory.
+    function getCampaigns() public view returns (Campaign[] memory) {
+        // we get all campaigns. "new Campaign[](numberOfCampaigns)", means we get the number of campaigns put it in an array of Campaign and assign it to the memory for "allCampaigns". "allCampaigns" is a new variable we just created and it is of a Type "Campaign[]"
+        Campaign[] memory allCampaigns = new Campaign[](numberOfCampaigns);
+
+        // loop through the array of campaigns
+        for (uint i = 0; i < numberOfCampaigns; i++) {
+            // fetching the specific campaign from storage
+            Campaign storage item = campaigns[i];
+
+            // populating our allCampaigns
+            allCampaigns[i] = item;
+        }
+        return allCampaigns;
+    }
 }
