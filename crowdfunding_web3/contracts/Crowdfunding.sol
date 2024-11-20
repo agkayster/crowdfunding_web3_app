@@ -76,8 +76,12 @@ contract CrowdFunding {
         }
     }
 
-    // list of all the donators
-    function getDonators() {}
+    // list of all the donators. it is a "view" function, to return some data to view it
+    function getDonators(
+        uint256 _id
+    ) public view returns (address[] memory, uint256[] memory) {
+        return (campaigns[_id].donators, campaigns[_id].donations);
+    }
 
     // to get the list of all campaigns
     function getCampaigns() {}
